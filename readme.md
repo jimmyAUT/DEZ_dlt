@@ -107,13 +107,12 @@ pipeline.run(data, table_name="rides", schema=schema, write_disposition="replace
 ✅ When you want to **define an independent data resource** (usually a table), suitable for:
     Extract data directly from APIs, files or repositories
     The data needs to be transformed (e.g. yield to handle API paging)
-
-    🚀 Usage scenarios
+🚀 Usage scenarios
     Pull data directly from the API
     Reading CSV / JSON files
     Read a single table from a source
 
-    ```python
+```python
     # define an api resource 
     @dlt.resource(name="rides")  # "rides" is table name 
     def ny_taxi():
@@ -122,7 +121,7 @@ pipeline.run(data, table_name="rides", schema=schema, write_disposition="replace
         # iterate API response
         for page in client.paginate("/taxi_rides"):
             yield page   
-    ```
+```
 
 ### 🔹 When to use @dlt.source?
 
@@ -130,13 +129,12 @@ pipeline.run(data, table_name="rides", schema=schema, write_disposition="replace
     Need to extract multiple different tables from the same source
     Need to manage multiple @dlt.resource in one function
     Some sources require shared parameters (such as API keys, authentication information)
-
-    🚀 Usage scenarios:
+🚀 Usage scenarios:
     Get a variety of data from the API
     Read multiple tables in a database
     Read multiple files of different types from an S3 bucket
 
-    ```python
+```python
     # define a source, which including many data resoure(end points)
     @dlt.source(name="ny_taxi_data")
     def ny_taxi_source():
@@ -153,7 +151,7 @@ pipeline.run(data, table_name="rides", schema=schema, write_disposition="replace
                 yield page
 
         return rides, drivers
-    ```
+```
 
 ---
 
